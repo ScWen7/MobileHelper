@@ -7,4 +7,6 @@ package com.xxh.mobilehelper.presenter;
  */
 
 public interface BasePresenter {
+    void attachView();
+    void detachView();
 }

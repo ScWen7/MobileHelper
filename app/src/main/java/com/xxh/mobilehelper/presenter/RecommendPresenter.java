@@ -34,4 +34,14 @@ public class RecommendPresenter implements RecommendContract.Presenter {
                         , t -> mView.dismissLoading());
 
     }
+
+    @Override
+    public void attachView() {
+
+    }
+
+    @Override
+    public void detachView() {
+
+    }
 }
