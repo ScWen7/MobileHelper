@@ -1,4 +1,4 @@
-package com.xxh.mobilehelper.common.util;
+package com.xxh.mobilehelper.data.http;
 
 import java.util.concurrent.TimeUnit;
 

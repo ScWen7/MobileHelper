@@ -1,4 +1,4 @@
-package com.xxh.mobilehelper.data.http;
+package com.xxh.mobilehelper.data.api;
 
 import com.xxh.mobilehelper.bean.AppInfo;
 import com.xxh.mobilehelper.bean.PageBean;

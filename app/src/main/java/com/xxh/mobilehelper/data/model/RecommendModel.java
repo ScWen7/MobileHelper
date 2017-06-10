@@ -2,7 +2,7 @@ package com.xxh.mobilehelper.data.model;
 
 import com.xxh.mobilehelper.bean.AppInfo;
 import com.xxh.mobilehelper.bean.PageBean;
-import com.xxh.mobilehelper.data.http.ApiService;
+import com.xxh.mobilehelper.data.api.ApiService;
 
 import io.reactivex.Observable;
 
