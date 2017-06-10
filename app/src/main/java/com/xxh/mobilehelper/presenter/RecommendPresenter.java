@@ -2,7 +2,7 @@ package com.xxh.mobilehelper.presenter;
 
 import com.xxh.mobilehelper.data.model.RecommendModel;
 import com.xxh.mobilehelper.data.rxhelper.RxSchedulerHepler;
-import com.xxh.mobilehelper.presenter.contract.RecommendContract;
+import com.xxh.mobilehelper.ui.view.RecommendView;
 
 
 /**
@@ -11,17 +11,16 @@ import com.xxh.mobilehelper.presenter.contract.RecommendContract;
  * 作用:
  */
 
-public class RecommendPresenter implements RecommendContract.Presenter {
-    private RecommendContract.View mView;
+public class RecommendPresenter extends BasePresenter {
+    private RecommendView mView;
 
     private RecommendModel mModel;
 
-    public RecommendPresenter(RecommendContract.View view, RecommendModel recommendModel) {
+    public RecommendPresenter(RecommendView view, RecommendModel recommendModel) {
         mView = view;
         mModel = recommendModel;
     }
 
-    @Override
     public void getApps(String jsonParams) {
 
         mModel.getApps(jsonParams)

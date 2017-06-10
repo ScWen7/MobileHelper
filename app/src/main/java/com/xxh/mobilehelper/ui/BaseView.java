@@ -7,4 +7,6 @@ package com.xxh.mobilehelper.ui;
  */
 
 public interface BaseView {
+    void showLoading();
+    void dismissLoading();
 }

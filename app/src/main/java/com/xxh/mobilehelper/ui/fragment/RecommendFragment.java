@@ -15,12 +15,12 @@ import com.xxh.mobilehelper.R;
 import com.xxh.mobilehelper.bean.AppInfo;
 import com.xxh.mobilehelper.bean.PageRequest;
 import com.xxh.mobilehelper.common.Constant;
-import com.xxh.mobilehelper.data.http.HttpUtil;
 import com.xxh.mobilehelper.data.api.ApiService;
+import com.xxh.mobilehelper.data.http.HttpUtil;
 import com.xxh.mobilehelper.data.model.RecommendModel;
 import com.xxh.mobilehelper.presenter.RecommendPresenter;
-import com.xxh.mobilehelper.presenter.contract.RecommendContract;
 import com.xxh.mobilehelper.ui.adapter.RecommendRecyAdapter;
+import com.xxh.mobilehelper.ui.view.RecommendView;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ import butterknife.ButterKnife;
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  */
-public class RecommendFragment extends Fragment implements RecommendContract.View {
+public class RecommendFragment extends Fragment implements RecommendView {
 
 
     @BindView(R.id.recycler_reco)

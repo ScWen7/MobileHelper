@@ -6,7 +6,7 @@ package com.xxh.mobilehelper.presenter;
  * 作用:
  */
 
-public interface BasePresenter {
-    void attachView();
-    void detachView();
+public abstract class BasePresenter {
+    abstract void attachView();
+     abstract void detachView();
 }

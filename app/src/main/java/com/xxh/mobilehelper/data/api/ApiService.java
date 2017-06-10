@@ -17,6 +17,6 @@ import retrofit2.http.Query;
 public interface ApiService {
 
 
-    @GET("featured")
+    @GET("featured2")
     Observable<PageBean<AppInfo>> getApps(@Query("p") String  jsonParams);
 }

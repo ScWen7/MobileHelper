@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.xxh.mobilehelper.MyApplication;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -22,6 +24,8 @@ public abstract class BaseFragment extends Fragment {
 
     protected Activity mActivity;
 
+    private MyApplication mApplication;
+
     protected View mRootView;
 
     private Unbinder mUnbinder;
@@ -33,10 +37,6 @@ public abstract class BaseFragment extends Fragment {
         mUnbinder = ButterKnife.bind(this, mRootView);
         return mRootView;
     }
-
-
-
-
 
     @Override
     public void onDestroyView() {
@@ -51,6 +51,7 @@ public abstract class BaseFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mActivity = getActivity();
+        mApplication = (MyApplication) mActivity.getApplication();
         initView();
     }
 
