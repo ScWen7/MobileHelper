@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">手机助手</string>
+    <string name="open"/>
+    <string name="close"/>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="refresh">&#xe650;</string>
+    <string name="error">&#xe641;</string>
+    <string-array name="main_tab" >
+        <item >推荐</item>
+        <item >排行</item>
+        <item >游戏</item>
+        <item >分类</item>
+    </string-array>
+</resources>

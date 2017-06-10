@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <item
+        android:id="@+id/menu1"
+        android:icon="@drawable/ic_account_circle_white_36dp"
+        android:title="Menu1"
+        app:showAsAction="ifRoom"
+       ></item>
+    <item
+        android:id="@+id/menu2"
+        android:icon="@drawable/ic_account_circle_white_36dp"
+        android:title="Menu2"
+        app:showAsAction="ifRoom"
+        ></item>
+    <item
+        android:id="@+id/menu3"
+        android:icon="@drawable/ic_account_circle_white_36dp"
+        android:title="Menu3"
+        app:showAsAction="ifRoom"
+        ></item>
+    <!--
+    问题：这里遇到了命名空间的问题
+    在使用  showAsAction属性的过程中，使用了 android:showAsAction 属性设置并没有生效
+     always  菜单会一直显示在toolBar上
+        ifRoom  如果有足够的空间就显示
+        never    永远不会出现在toolBar上，显示在溢出栏上
+        withText  能够显示文字
+        说明：
+        如果同时设置了icon和title，默认只会显示icon。
+         如果想同时显示title和icon，可以加入app:showAsAction="always|withText"，
+         但是即便这样也不会一定生效，withText对actionBar的title来说只是一个hint，
+         在条件允许的情况下actionBar会显示title，但是当设置了icon并由于空间限制也不会显示title。
+        不过，官方还是建议我们设置title的，在长按icon的情况下title就会出现，
+        另外官方还建议showAsAction最好设置为ifRoom，
+        如果设置为always可能会在比较窄的屏幕上带来布局的问题。
+    -->
+</menu>

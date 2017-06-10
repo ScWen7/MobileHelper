@@ -1,0 +1,29 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.ToolBar" parent="AppTheme">
+        <item name="drawerArrowStyle">@style/AppTheme.DrawerArrowToogle</item>
+        <item name="android:windowActionBarOverlay">@style/ActionButton.Overflow</item>
+        <item name="actionOverflowButtonStyle">@style/ActionButton.Overflow</item>
+        <item name="android:titleTextColor">@android:color/white</item>
+    </style>
+
+    <style name="ActionButton.Overflow" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_account_circle_white_36dp</item>
+    </style>
+
+    <style name="AppTheme.DrawerArrowToogle" parent="Base.Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@android:color/white</item>
+    </style>
+
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.PopupOverlay" parent="AlertDialog.AppCompat.Light"/>
+</resources>
