@@ -31,9 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     NavigationView mNagigationMain;
-    @BindView(R.id.drawer_main)
+
     DrawerLayout mDrawerMain;
-    @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.tabLayout)
     TabLayout mTabLayout;
@@ -49,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mDrawerMain = (DrawerLayout) findViewById(R.id.drawer_main);
         titles = getResources().getStringArray(R.array.main_tab);
         initDrawerLayout();
         initFragments();
@@ -120,7 +121,6 @@ public class MainActivity extends AppCompatActivity {
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerMain, mToolbar, R.string.open, R.string.close);
         actionBarDrawerToggle.syncState();
         mDrawerMain.addDrawerListener(actionBarDrawerToggle);
-
 
     }
 

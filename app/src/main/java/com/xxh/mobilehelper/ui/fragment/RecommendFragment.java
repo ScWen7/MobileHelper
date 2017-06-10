@@ -6,18 +6,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.gson.Gson;
 import com.xxh.mobilehelper.R;
 import com.xxh.mobilehelper.bean.AppInfo;
-import com.xxh.mobilehelper.bean.PageRequest;
 import com.xxh.mobilehelper.common.Constant;
 import com.xxh.mobilehelper.data.api.ApiService;
 import com.xxh.mobilehelper.data.http.HttpUtil;
 import com.xxh.mobilehelper.data.model.RecommendModel;
+import com.xxh.mobilehelper.data.rxhelper.RxSchedulerHepler;
 import com.xxh.mobilehelper.presenter.RecommendPresenter;
 import com.xxh.mobilehelper.ui.adapter.RecommendRecyAdapter;
 import com.xxh.mobilehelper.ui.view.RecommendView;
@@ -61,7 +61,7 @@ public class RecommendFragment extends Fragment implements RecommendView {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recommend, container, false);
         ButterKnife.bind(this, view);
-
+        mRecyclerReco = (RecyclerView) view.findViewById(R.id.recycler_reco);
         return view;
     }
 
@@ -74,7 +74,14 @@ public class RecommendFragment extends Fragment implements RecommendView {
 
     private void initDatas() {
         mRecyclerReco.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecommendPresenter.getApps(new Gson().toJson(new PageRequest(0)));
+//            mRecommendPresenter.getApps(0);
+        ApiService apiService = mHttpUtil.provideRetrofit(Constant.BASE_URL).create(ApiService.class);
+        apiService.getTopList(0).compose(RxSchedulerHepler.io_main())
+                .subscribe(s -> {
+                            Log.e("TAG", ""+s);
+                        }
+                        , t -> t.printStackTrace());
+
     }
 
     @Override

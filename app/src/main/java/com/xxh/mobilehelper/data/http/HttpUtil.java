@@ -37,10 +37,14 @@ public class HttpUtil {
         //打印整个body
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
+
+
         return new OkHttpClient.Builder()
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(10,TimeUnit.SECONDS)
-                .addInterceptor(interceptor).build();
+                .addInterceptor(interceptor)
+                .addInterceptor(new HttpParamInterceptor())
+                .build();
     }
 
 

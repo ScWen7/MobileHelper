@@ -4,7 +4,9 @@ import com.xxh.mobilehelper.bean.AppInfo;
 import com.xxh.mobilehelper.bean.PageBean;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 
@@ -18,5 +20,14 @@ public interface ApiService {
 
 
     @GET("featured2")
-    Observable<PageBean<AppInfo>> getApps(@Query("p") String  jsonParams);
+    Observable<PageBean<AppInfo>> getApps(@Query("p") String jsonParams);
+
+    @GET("featured2")
+    Observable<PageBean<AppInfo>> getAppList(@Query("page") int page);
+
+
+    @POST("toplist")
+    Observable<String> getTopList(@Field("page")  int page);
+
+
 }

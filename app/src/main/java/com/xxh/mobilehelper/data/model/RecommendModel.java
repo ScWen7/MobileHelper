@@ -24,4 +24,8 @@ public class RecommendModel {
         return mApiService
                 .getApps(jsonParams);
     }
+    public Observable<PageBean<AppInfo>> getAppList(int  page) {
+        return mApiService
+                .getAppList(page);
+    }
 }

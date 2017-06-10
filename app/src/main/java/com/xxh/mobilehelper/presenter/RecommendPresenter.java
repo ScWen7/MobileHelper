@@ -21,9 +21,9 @@ public class RecommendPresenter extends BasePresenter {
         mModel = recommendModel;
     }
 
-    public void getApps(String jsonParams) {
+    public void getApps(int  page) {
 
-        mModel.getApps(jsonParams)
+        mModel.getAppList(page)
                 .compose(RxSchedulerHepler.io_main())
                 .doOnSubscribe(disposable -> mView.showLoading())
                 .subscribe(appInfoPageBean -> {
