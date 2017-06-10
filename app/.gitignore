@@ -1,0 +1,9 @@
+*.iml
+.idea
+/local.properties
+/captures
+.gradle
+/build
+src/androidTest
+src/test
+
