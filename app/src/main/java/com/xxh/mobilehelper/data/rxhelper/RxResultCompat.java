@@ -8,7 +8,7 @@ import io.reactivex.ObservableTransformer;
 /**
  * Created by 解晓辉  on 2017/6/4 13:56 *
  * QQ  ：811733738
- * 作用:
+ * 作用: 对Retrofit 返回数据的预处理
  */
 
 public class RxResultCompat {
