@@ -16,40 +16,45 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HttpUtil {
 
-  private static   HttpUtil instance;
+    private static HttpUtil instance;
 
     private OkHttpClient mOkHttpClient;
+
+
     private HttpUtil() {
+
         mOkHttpClient = provideOkHttpClient();
     }
 
-    public  static HttpUtil create(){
-        if(instance==null) {
+    public static HttpUtil create() {
+        if (instance == null) {
             instance = new HttpUtil();
         }
         return instance;
     }
 
+    public static HttpUtil getInstance() {
+        return instance;
+    }
 
-    public  OkHttpClient provideOkHttpClient(){
+
+    public OkHttpClient provideOkHttpClient() {
         //log  用的拦截器
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         //打印整个body
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-
-
         return new OkHttpClient.Builder()
                 .connectTimeout(10, TimeUnit.SECONDS)
-                .readTimeout(10,TimeUnit.SECONDS)
+                .readTimeout(10, TimeUnit.SECONDS)
                 .addInterceptor(interceptor)
                 .addInterceptor(new HttpParamInterceptor())
                 .build();
     }
 
 
-    public Retrofit provideRetrofit(String baseUrl){
-        Retrofit.Builder  builder= new Retrofit.Builder()
+    public Retrofit provideRetrofit(String baseUrl) {
+        Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())

@@ -1,10 +1,12 @@
 package com.xxh.mobilehelper.ui.activity;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -28,9 +30,12 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.Manifest.permission.READ_PHONE_STATE;
+
 public class MainActivity extends AppCompatActivity {
 
 
+    private static final int READ_PHONE_STATE_CODE = 1001;
     NavigationView mNagigationMain;
 
     DrawerLayout mDrawerMain;
@@ -52,9 +57,34 @@ public class MainActivity extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mDrawerMain = (DrawerLayout) findViewById(R.id.drawer_main);
         titles = getResources().getStringArray(R.array.main_tab);
-        initDrawerLayout();
-        initFragments();
-        initViewPager();
+        initPermission();
+
+    }
+
+    private void initPermission() {
+        if(ActivityCompat.checkSelfPermission(this, READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+            //权限授予
+            initDrawerLayout();
+            initFragments();
+            initViewPager();
+        }else {
+            ActivityCompat.requestPermissions(this,new String[]{READ_PHONE_STATE},READ_PHONE_STATE_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode==READ_PHONE_STATE_CODE) {
+            if(grantResults[0]== PackageManager.PERMISSION_GRANTED) {
+                //权限打开
+                //权限授予
+                initDrawerLayout();
+                initFragments();
+                initViewPager();
+            }else {
+                finish();
+            }
+        }
     }
 
     private void initFragments() {
