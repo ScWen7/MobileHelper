@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:background="@color/white"
+              android:paddingBottom="10dp"
+              android:paddingTop="20dp">
+
+    <TextView
+        android:id="@+id/tv_home_order"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/dingdan"
+        android:textSize="12dp"
+        android:drawablePadding="5dp"
+        android:textColor="@color/text_dark"
+        android:text="我的订单"/>
+
+    <TextView
+        android:id="@+id/tv_home_package"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:drawableTop="@drawable/taocan"
+        android:textSize="12dp"
+        android:drawablePadding="5dp"
+        android:textColor="@color/text_dark"
+        android:text="超值套餐"/>
+
+    <TextView
+        android:id="@+id/tv_home_sign"
+        android:layout_width="0dp"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/qiandao"
+        android:textSize="12dp"
+        android:drawablePadding="5dp"
+        android:textColor="@color/text_dark"
+        android:text="会员签到"/>
+
+    <TextView
+        android:id="@+id/tv_home_invaite"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:drawableTop="@drawable/xinke"
+        android:textColor="@color/text_dark"
+        android:textSize="12dp"
+        android:drawablePadding="5dp"
+        android:text="邀请有礼"/>
+
+</LinearLayout>

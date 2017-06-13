@@ -1,23 +1,14 @@
 package com.xxh.mobilehelper.ui.fragment;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.xxh.mobilehelper.R;
-import com.xxh.mobilehelper.bean.AppInfo;
-import com.xxh.mobilehelper.common.Constant;
-import com.xxh.mobilehelper.data.api.ApiService;
-import com.xxh.mobilehelper.data.http.HttpUtil;
+import com.xxh.mobilehelper.base.BaseMvpFragment;
 import com.xxh.mobilehelper.data.model.RecommendModel;
-import com.xxh.mobilehelper.data.rxhelper.RxSchedulerHepler;
 import com.xxh.mobilehelper.presenter.RecommendPresenter;
 import com.xxh.mobilehelper.ui.adapter.RecommendRecyAdapter;
 import com.xxh.mobilehelper.ui.view.RecommendView;
@@ -25,13 +16,12 @@ import com.xxh.mobilehelper.ui.view.RecommendView;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  */
-public class RecommendFragment extends Fragment implements RecommendView {
+public class RecommendFragment extends BaseMvpFragment<RecommendPresenter> implements RecommendView {
 
 
     @BindView(R.id.recycler_reco)
@@ -41,13 +31,9 @@ public class RecommendFragment extends Fragment implements RecommendView {
 
 
 
-    RecommendPresenter mRecommendPresenter;
-    private final HttpUtil mHttpUtil;
+
 
     public RecommendFragment() {
-        mHttpUtil = HttpUtil.create();
-        ApiService apiService = mHttpUtil.provideRetrofit(Constant.BASE_URL).create(ApiService.class);
-        mRecommendPresenter = new RecommendPresenter(this,new RecommendModel(apiService));
     }
 
     public static RecommendFragment newInstance() {
@@ -56,38 +42,24 @@ public class RecommendFragment extends Fragment implements RecommendView {
         return fragment;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_recommend, container, false);
-        ButterKnife.bind(this, view);
-        mRecyclerReco = (RecyclerView) view.findViewById(R.id.recycler_reco);
-        return view;
-    }
+
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        initDatas();
-    }
-
-    private void initDatas() {
+    protected void initView() {
+        mRefresh.setColorSchemeResources( android.R.color.holo_green_light, android.R.color.holo_red_light, android.R.color.holo_blue_light);
         mRecyclerReco.setLayoutManager(new LinearLayoutManager(getActivity()));
-//            mRecommendPresenter.getApps(0);
-        ApiService apiService = mHttpUtil.provideRetrofit(Constant.BASE_URL).create(ApiService.class);
-        apiService.getTopList(0).compose(RxSchedulerHepler.io_main())
-                .subscribe(s -> {
-                            Log.e("TAG", ""+s);
-                        }
-                        , t -> t.printStackTrace());
-
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
+    protected int getLayoutId() {
+        return R.layout.fragment_recommend;
     }
+
+    @Override
+    public RecommendPresenter createPresenter() {
+        return new RecommendPresenter(this,new RecommendModel());
+    }
+
 
     @Override
     public void showLoading() {
@@ -100,9 +72,9 @@ public class RecommendFragment extends Fragment implements RecommendView {
     }
 
     @Override
-    public void showResult(List<AppInfo> appInfos) {
-        RecommendRecyAdapter recyAdapter = new RecommendRecyAdapter(R.layout.item_reco_recy,appInfos);
-        mRecyclerReco.setAdapter(recyAdapter);
+    public void showResult(List<MultiItemEntity> multiItemEntities) {
+        RecommendRecyAdapter recommendRecyAdapter = new RecommendRecyAdapter(multiItemEntities);
+        mRecyclerReco.setAdapter(recommendRecyAdapter);
     }
 
     @Override

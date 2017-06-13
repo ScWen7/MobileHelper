@@ -3,6 +3,8 @@ package com.xxh.mobilehelper.data.rxhelper;
 
 import android.util.Log;
 
+import com.xxh.mobilehelper.common.util.UIUtils;
+
 import org.json.JSONException;
 
 import java.net.ConnectException;
@@ -39,13 +41,16 @@ public class RxExceptionHandler<T extends Throwable> implements Consumer<T> {
         t.printStackTrace();
         if(t instanceof SocketTimeoutException) {
             Log.e(TAG, "onError: SocketTimeoutException---");
-            // TODO: 2017/6/10  增加Toast 提示
+            UIUtils.showToast(TIMEOUT_EXCEPTION);
         }else if(t instanceof ConnectException) {
             Log.e(TAG, "onError: CONNECT_EXCEPTION---");
+            UIUtils.showToast(CONNECT_EXCEPTION);
         }else if (t instanceof UnknownHostException){
             Log.e(TAG, "onError: UNKNOWN_HOST_EXCEPTION---");
+            UIUtils.showToast(UNKNOWN_HOST_EXCEPTION);
         }else if(t instanceof JSONException) {
             Log.e("TAG", "onError: JSON_EXCEPTION");
+            UIUtils.showToast(JSON_EXCEPTION);
         }
         else {
             try {

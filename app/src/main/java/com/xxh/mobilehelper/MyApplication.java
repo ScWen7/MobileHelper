@@ -3,7 +3,9 @@ package com.xxh.mobilehelper;
 import android.app.Application;
 import android.content.Context;
 
-import com.xxh.mobilehelper.common.util.UiUtils;
+import com.xxh.mobilehelper.common.util.DensityUtil;
+import com.xxh.mobilehelper.common.util.DeviceUtils;
+import com.xxh.mobilehelper.common.util.UIUtils;
 
 /**
  * Created by 解晓辉  on 2017/5/24 20:36 *
@@ -24,6 +26,8 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        UiUtils.init(this);
+        UIUtils.init(this);
+        DeviceUtils.init(this);
+        DensityUtil.init(this);
     }
 }

@@ -1,6 +1,8 @@
 package com.xxh.mobilehelper.data.api;
 
 import com.xxh.mobilehelper.bean.AppInfo;
+import com.xxh.mobilehelper.bean.BaseResult;
+import com.xxh.mobilehelper.bean.IndexBean;
 import com.xxh.mobilehelper.bean.PageBean;
 
 import io.reactivex.Observable;
@@ -28,6 +30,10 @@ public interface ApiService {
 
     @POST("toplist")
     Observable<String> getTopList(@Field("page")  int page);
+
+
+    @GET("index")
+    Observable<BaseResult<IndexBean>> getIndex();
 
 
 }

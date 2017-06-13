@@ -1,6 +1,6 @@
 package com.xxh.mobilehelper.ui.view;
 
-import com.xxh.mobilehelper.bean.AppInfo;
+import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.xxh.mobilehelper.ui.BaseView;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 public interface RecommendView extends BaseView{
-    void showResult(List<AppInfo> appInfos);
+    void showResult(List<MultiItemEntity> multiItemEntities);
     void showNoData();
     void showError();
 }

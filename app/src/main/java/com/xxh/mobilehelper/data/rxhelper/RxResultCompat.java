@@ -3,7 +3,9 @@ package com.xxh.mobilehelper.data.rxhelper;
 import com.xxh.mobilehelper.bean.BaseResult;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
+import io.reactivex.functions.Function;
 
 /**
  * Created by 解晓辉  on 2017/6/4 13:56 *
@@ -13,14 +15,19 @@ import io.reactivex.ObservableTransformer;
 
 public class RxResultCompat {
     public static <T> ObservableTransformer<BaseResult<T>, T> handleResult() {
-        return upstream -> {
-          return   upstream.flatMap(tBaseResult -> {
-                if (tBaseResult.isSuccess()) {
-                    return Observable.just(tBaseResult.getData());
-                }
-                return Observable.empty();
+        return new ObservableTransformer<BaseResult<T>, T>() {
+            @Override
+            public ObservableSource<T> apply(Observable<BaseResult<T>> upstream) {
+                return upstream.flatMap(new Function<BaseResult<T>, ObservableSource<T>>() {
+                    @Override
+                    public ObservableSource<T> apply(BaseResult<T> tBaseResult) throws Exception {
+                        if (tBaseResult.isSuccess()) {
+                            return Observable.just(tBaseResult.getData());
+                        }
+                        return Observable.empty();
+                    }
+                });
             }
-          );
         };
     }
 }

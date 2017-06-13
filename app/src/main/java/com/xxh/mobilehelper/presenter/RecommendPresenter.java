@@ -1,8 +1,13 @@
 package com.xxh.mobilehelper.presenter;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.xxh.mobilehelper.data.model.RecommendModel;
-import com.xxh.mobilehelper.data.rxhelper.RxSchedulerHepler;
+import com.xxh.mobilehelper.data.rxhelper.RxExceptionHandler;
 import com.xxh.mobilehelper.ui.view.RecommendView;
+
+import java.util.List;
+
+import io.reactivex.functions.Consumer;
 
 
 /**
@@ -21,26 +26,32 @@ public class RecommendPresenter extends BasePresenter {
         mModel = recommendModel;
     }
 
-    public void getApps(int  page) {
-
-        mModel.getAppList(page)
-                .compose(RxSchedulerHepler.io_main())
-                .doOnSubscribe(disposable -> mView.showLoading())
-                .subscribe(appInfoPageBean -> {
-                            mView.dismissLoading();
-                            mView.showResult(appInfoPageBean.getDatas());
-                        }
-                        , t -> mView.dismissLoading());
-
-    }
-
     @Override
     public void attachView() {
-
+        mView.showLoading();
+        mModel.getIndex()
+              .subscribe(new Consumer<List<MultiItemEntity>>() {
+                  @Override
+                  public void accept(List<MultiItemEntity> multiItemEntities) throws Exception {
+                      mView.dismissLoading();
+                      if(multiItemEntities!=null && multiItemEntities.size()>0) {
+                          mView.showResult(multiItemEntities);
+                      }else {
+                          mView.showNoData();
+                      }
+                  }
+              },new RxExceptionHandler<Throwable>(new Consumer<Throwable>() {
+                  @Override
+                  public void accept(Throwable throwable) throws Exception {
+                      mView.dismissLoading();
+                      mView.showError();
+                  }
+              }));
     }
 
     @Override
     public void detachView() {
-
+        mView = null;
+        mModel = null;
     }
 }

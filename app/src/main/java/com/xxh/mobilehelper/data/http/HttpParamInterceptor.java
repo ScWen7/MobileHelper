@@ -1,9 +1,12 @@
 package com.xxh.mobilehelper.data.http;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.xxh.mobilehelper.common.Constant;
+import com.xxh.mobilehelper.common.util.DensityUtil;
+import com.xxh.mobilehelper.common.util.DeviceUtils;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -30,7 +33,22 @@ public class HttpParamInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         HashMap<String, Object> commonMap = new HashMap<>();
-        commonMap.put("p", "s");
+
+        String imei = DeviceUtils.getIMEI();
+
+        if(imei !=null && imei.startsWith("000000")){
+            imei ="5284047f4ffb4e04824a2fd1d1f0cd62";
+        }
+
+        commonMap.put(Constant.IMEI, imei);
+        commonMap.put(Constant.MODEL,DeviceUtils.getModel());
+        commonMap.put(Constant.LANGUAGE,DeviceUtils.getLanguage());
+        commonMap.put(Constant.os,DeviceUtils.getBuildVersionIncremental());
+        commonMap.put(Constant.RESOLUTION, DensityUtil.getScreenW()+"*" + DensityUtil.getScreenH());
+        commonMap.put(Constant.SDK,DeviceUtils.getBuildVersionSDK()+"");
+        commonMap.put(Constant.DENSITY_SCALE_FACTOR,DensityUtil.getDensity()+"");
+
+
         Request request = chain.request();
         String method = request.method();
         if ("GET".equals(method)) {  //GET请求
@@ -69,6 +87,7 @@ public class HttpParamInterceptor implements Interceptor {
 
             newUrl = newUrl + "?" + Constant.API_PARAM + "=" + newParams;
             request = request.newBuilder().url(newUrl).build();
+            Log.e("TAG", "newUrl:"+newUrl);
 
 
         } else if ("POST".equals(method)) {  //POST 请求
