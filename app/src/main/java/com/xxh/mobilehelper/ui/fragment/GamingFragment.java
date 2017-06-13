@@ -1,5 +1,6 @@
 package com.xxh.mobilehelper.ui.fragment;
 
+import com.xxh.mobilehelper.R;
 import com.xxh.mobilehelper.base.BaseMvpFragment;
 import com.xxh.mobilehelper.presenter.GamePresenter;
 
@@ -11,13 +12,6 @@ public class GamingFragment extends BaseMvpFragment<GamePresenter> {
 
 
 
-
-
-    public GamingFragment() {
-        // Required empty public constructor
-    }
-
-
     public static GamingFragment newInstance() {
         GamingFragment fragment = new GamingFragment();
         return fragment;
@@ -26,7 +20,7 @@ public class GamingFragment extends BaseMvpFragment<GamePresenter> {
 
     @Override
     public GamePresenter createPresenter() {
-        return null;
+        return new GamePresenter();
     }
 
     @Override
@@ -36,6 +30,6 @@ public class GamingFragment extends BaseMvpFragment<GamePresenter> {
 
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.fragment_gaming;
     }
 }

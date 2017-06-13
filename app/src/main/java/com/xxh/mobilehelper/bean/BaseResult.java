@@ -9,6 +9,8 @@ package com.xxh.mobilehelper.bean;
 public class BaseResult<T> {
 
     public static final int SUCCESS = 1;
+    public static final int TOKEN_MISS = 10010;
+
 
     private int status;
     private String message;

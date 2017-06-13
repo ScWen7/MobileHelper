@@ -1,5 +1,6 @@
 package com.xxh.mobilehelper.ui.view;
 
+import com.xxh.mobilehelper.bean.RankBean;
 import com.xxh.mobilehelper.ui.BaseView;
 
 /**
@@ -8,5 +9,7 @@ import com.xxh.mobilehelper.ui.BaseView;
  */
 
 public interface RankingView extends BaseView {
+
+    void showResult(RankBean rankBean);
 
 }

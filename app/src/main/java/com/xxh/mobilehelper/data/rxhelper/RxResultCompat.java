@@ -1,6 +1,7 @@
 package com.xxh.mobilehelper.data.rxhelper;
 
 import com.xxh.mobilehelper.bean.BaseResult;
+import com.xxh.mobilehelper.common.exception.TokenException;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -23,6 +24,8 @@ public class RxResultCompat {
                     public ObservableSource<T> apply(BaseResult<T> tBaseResult) throws Exception {
                         if (tBaseResult.isSuccess()) {
                             return Observable.just(tBaseResult.getData());
+                        }else if(tBaseResult.getStatus() == BaseResult.TOKEN_MISS) {
+                                return Observable.error(new TokenException(tBaseResult.getStatus()+"",tBaseResult.getMessage()));
                         }
                         return Observable.empty();
                     }
