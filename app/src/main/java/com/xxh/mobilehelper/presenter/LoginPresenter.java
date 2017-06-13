@@ -30,11 +30,12 @@ public class LoginPresenter extends BasePresenter {
                     @Override
                     public void accept(LoginBean loginBean) throws Exception {
                         mLoginView.dissmissLoading();
-                        mLoginView.loginSuccess();
+                        mLoginView.loginSuccess(loginBean);
                     }
                 }, new RxExceptionHandler<Throwable>(new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
+                        throwable.printStackTrace();
                         mLoginView.dissmissLoading();
                         mLoginView.loginError();
                     }

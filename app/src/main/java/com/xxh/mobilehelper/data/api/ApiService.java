@@ -8,6 +8,7 @@ import com.xxh.mobilehelper.bean.PageBean;
 import com.xxh.mobilehelper.bean.RankBean;
 
 import io.reactivex.Observable;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -40,8 +41,9 @@ public interface ApiService {
     @GET("game")
     Observable<BaseResult<IndexBean>> getGame();
 
+
     @POST("login")
-    Observable<BaseResult<LoginBean>> login(@Field("email") String email, @Field("password") String pwd);
+    Observable<BaseResult<LoginBean>> login(@Body LoginRequest request);
 
 
 }

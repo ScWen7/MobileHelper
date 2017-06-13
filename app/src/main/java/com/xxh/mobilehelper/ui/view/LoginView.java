@@ -1,5 +1,7 @@
 package com.xxh.mobilehelper.ui.view;
 
+import com.xxh.mobilehelper.bean.LoginBean;
+
 /**
  * Created by 解晓辉 on 2017/6/13.
  * 作用：
@@ -8,7 +10,7 @@ package com.xxh.mobilehelper.ui.view;
 public interface LoginView {
     void showLoginLoading();
     void dissmissLoading();
-    void loginSuccess();
+    void loginSuccess(LoginBean loginBean);
 
     void loginError();
 }

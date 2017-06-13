@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.xxh.mobilehelper.MyApplication;
 
@@ -32,6 +33,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+        Log.e("TAG", "BaseActivity onCreate");
         //ButterKnife 的绑定
         mUnbinder = ButterKnife.bind(this);
         this.mApplication = (MyApplication) getApplication();

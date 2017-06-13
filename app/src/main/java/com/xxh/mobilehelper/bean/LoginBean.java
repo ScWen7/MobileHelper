@@ -5,22 +5,22 @@ package com.xxh.mobilehelper.bean;
  * 作用：
  */
 public class LoginBean {
-    private String email;
-    private String password;
+    private String token;
+    private UserBean user;
 
-    public String getEmail() {
-        return email;
+    public String getToken() {
+        return token;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setToken(String token) {
+        this.token = token;
     }
 
-    public String getPassword() {
-        return password;
+    public UserBean getUser() {
+        return user;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUser(UserBean user) {
+        this.user = user;
     }
 }

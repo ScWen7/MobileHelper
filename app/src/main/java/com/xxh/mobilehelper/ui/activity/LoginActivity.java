@@ -5,6 +5,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.xxh.mobilehelper.R;
 import com.xxh.mobilehelper.base.BaseMvpActivity;
+import com.xxh.mobilehelper.bean.LoginBean;
 import com.xxh.mobilehelper.presenter.LoginPresenter;
 import com.xxh.mobilehelper.ui.view.LoginView;
 
@@ -55,6 +57,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
 
     @Override
     public LoginPresenter createPresenter() {
+        Log.e("TAG", "createPresenter()");
         return new LoginPresenter(this);
     }
 
@@ -112,12 +115,12 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
                 }
                 if (s.toString().isEmpty())
                     return;
-                if (!s.toString().matches("[A-Za-z0-9]+")) {
-                    String temp = s.toString();
-                    Toast.makeText(LoginActivity.this, "请输入数字或字母", Toast.LENGTH_SHORT).show();
-                    s.delete(temp.length() - 1, temp.length());
-                    mEtPassword.setSelection(s.length());
-                }
+//                if (!s.toString().matches("[A-Za-z0-9]+")) {
+//                    String temp = s.toString();
+//                    Toast.makeText(LoginActivity.this, "请输入数字或字母", Toast.LENGTH_SHORT).show();
+//                    s.delete(temp.length() - 1, temp.length());
+//                    mEtPassword.setSelection(s.length());
+//                }
             }
         });
 
@@ -129,7 +132,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
         return R.layout.activity_login;
     }
 
-    @OnClick({R.id.iv_clean_phone, R.id.clean_password, R.id.iv_show_pwd})
+    @OnClick({R.id.iv_clean_phone, R.id.clean_password, R.id.iv_show_pwd, R.id.btn_login})
     public void clickOnView(View view) {
         switch (view.getId()) {
             case R.id.iv_clean_phone:
@@ -150,6 +153,12 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
                 if (!TextUtils.isEmpty(pwd))
                     mEtPassword.setSelection(pwd.length());
                 break;
+            case R.id.btn_login:
+                //登录
+                String email = mEtMobile.getText().toString();
+                String password = mEtPassword.getText().toString();
+                mPresenter.login(email, password);
+                break;
         }
     }
 
@@ -165,8 +174,9 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     }
 
     @Override
-    public void loginSuccess() {
-
+    public void loginSuccess(LoginBean loginBean) {
+        String token = loginBean.getToken();
+        Toast.makeText(LoginActivity.this, "token:"+token, Toast.LENGTH_SHORT).show();
     }
 
     @Override

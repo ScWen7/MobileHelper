@@ -1,7 +1,7 @@
 package com.xxh.mobilehelper.base;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.util.Log;
 
 import com.xxh.mobilehelper.presenter.BasePresenter;
 
@@ -19,11 +19,12 @@ import com.xxh.mobilehelper.presenter.BasePresenter;
 
 public abstract class BaseMvpActivity<P extends BasePresenter> extends BaseActivity {
 
-    P mPresenter;
+   protected P mPresenter;
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.e("TAG", "oncreate BaseMvpActivity");
         mPresenter = createPresenter();
         mPresenter.attachView();
     }
