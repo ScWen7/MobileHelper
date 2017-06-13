@@ -1,5 +1,6 @@
 package com.xxh.mobilehelper.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -77,7 +78,9 @@ public class MainActivity extends AppCompatActivity {
         headerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "点击头部", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                //关闭侧滑菜单
+                mDrawerMain.closeDrawer(GravityCompat.START);
             }
         });
         mNagigationMain.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -124,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
         mDrawerMain.addDrawerListener(actionBarDrawerToggle);
 
     }
-
 
 
 }
