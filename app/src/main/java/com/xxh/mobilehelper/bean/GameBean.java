@@ -72,7 +72,7 @@ public class GameBean {
         private int videoId;
         private String source;
         private String versionName;
-        private RankBean.DatasBean.HdIconBean hdIcon;
+        private AppInfoBean.AppBean.HdIconBean hdIcon;
         private double ratingScore;
         private String briefShow;
         private int developerId;
@@ -145,11 +145,11 @@ public class GameBean {
             this.versionName = versionName;
         }
 
-        public RankBean.DatasBean.HdIconBean getHdIcon() {
+        public AppInfoBean.AppBean.HdIconBean getHdIcon() {
             return hdIcon;
         }
 
-        public void setHdIcon(RankBean.DatasBean.HdIconBean hdIcon) {
+        public void setHdIcon(AppInfoBean.AppBean.HdIconBean hdIcon) {
             this.hdIcon = hdIcon;
         }
 

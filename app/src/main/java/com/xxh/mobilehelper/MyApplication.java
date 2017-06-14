@@ -6,6 +6,7 @@ import android.content.Context;
 import com.xxh.mobilehelper.common.util.DensityUtil;
 import com.xxh.mobilehelper.common.util.DeviceUtils;
 import com.xxh.mobilehelper.common.util.UIUtils;
+import com.xxh.mobilehelper.data.http.HttpUtil;
 
 /**
  * Created by 解晓辉  on 2017/5/24 20:36 *
@@ -22,11 +23,11 @@ public class MyApplication extends Application {
     }
 
 
-
     @Override
     public void onCreate() {
         super.onCreate();
         UIUtils.init(this);
+        HttpUtil.create(this);
         DeviceUtils.init(this);
         DensityUtil.init(this);
     }

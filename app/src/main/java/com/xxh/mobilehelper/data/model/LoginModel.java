@@ -20,7 +20,7 @@ public class LoginModel {
     private ApiService mApiService;
 
     public LoginModel() {
-        mApiService = HttpUtil.create().provideRetrofit(Constant.BASE_URL).create(ApiService.class);
+        mApiService = HttpUtil.getInstance().provideRetrofit(Constant.BASE_URL).create(ApiService.class);
     }
 
     public Observable<LoginBean> login(String email, String passdord) {

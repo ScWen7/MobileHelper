@@ -1,5 +1,7 @@
 package com.xxh.mobilehelper.data.http;
 
+import android.content.Context;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -21,17 +23,19 @@ public class HttpUtil {
     private OkHttpClient mOkHttpClient;
 
 
-    private HttpUtil() {
-
+    private Context mContext;
+    private HttpUtil(Context context) {
+        this.mContext = context;
         mOkHttpClient = provideOkHttpClient();
     }
 
-    public static HttpUtil create() {
+    public static HttpUtil create(Context context) {
         if (instance == null) {
-            instance = new HttpUtil();
+            instance = new HttpUtil(context);
         }
         return instance;
     }
+
 
     public static HttpUtil getInstance() {
         return instance;
@@ -48,7 +52,7 @@ public class HttpUtil {
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS)
                 .addInterceptor(interceptor)
-                .addInterceptor(new HttpParamInterceptor())
+                .addInterceptor(new HttpParamInterceptor(mContext))
                 .build();
     }
 

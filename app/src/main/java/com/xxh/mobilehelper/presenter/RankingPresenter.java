@@ -1,6 +1,6 @@
 package com.xxh.mobilehelper.presenter;
 
-import com.xxh.mobilehelper.bean.RankBean;
+import com.xxh.mobilehelper.bean.AppInfoBean;
 import com.xxh.mobilehelper.data.model.RankingModel;
 import com.xxh.mobilehelper.data.rxhelper.RxExceptionHandler;
 import com.xxh.mobilehelper.ui.view.RankingView;
@@ -27,12 +27,12 @@ public class RankingPresenter extends BasePresenter {
     @Override
     public void attachView() {
         mView.showLoading();
-        mModel.getTopList().subscribe(new Consumer<RankBean>() {
+        mModel.getTopList(0).subscribe(new Consumer<AppInfoBean>() {
             @Override
-            public void accept(RankBean rankBean) throws Exception {
+            public void accept(AppInfoBean appInfoBean) throws Exception {
                 //表示数据获取成功
                 mView.dismissLoading();
-                mView.showResult(rankBean);
+                mView.showResult(appInfoBean);
             }
         }, new RxExceptionHandler<Throwable>(new Consumer<Throwable>() {
             @Override

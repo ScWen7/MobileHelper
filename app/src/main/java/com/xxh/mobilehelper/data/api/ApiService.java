@@ -5,11 +5,10 @@ import com.xxh.mobilehelper.bean.BaseResult;
 import com.xxh.mobilehelper.bean.IndexBean;
 import com.xxh.mobilehelper.bean.LoginBean;
 import com.xxh.mobilehelper.bean.PageBean;
-import com.xxh.mobilehelper.bean.RankBean;
+import com.xxh.mobilehelper.bean.AppInfoBean;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -32,14 +31,14 @@ public interface ApiService {
 
 
     @GET("toplist")
-    Observable<BaseResult<RankBean>> getTopList(@Query("page") int page);
+    Observable<BaseResult<AppInfoBean>> getTopList(@Query("page") int page);
 
 
     @GET("index")
     Observable<BaseResult<IndexBean>> getIndex();
 
     @GET("game")
-    Observable<BaseResult<IndexBean>> getGame();
+    Observable<BaseResult<AppInfoBean>> getGame(@Query("page") int page);
 
 
     @POST("login")

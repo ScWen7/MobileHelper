@@ -7,14 +7,14 @@ import java.util.List;
  * 作用：
  */
 
-public class RankBean {
+public class AppInfoBean {
 
 
 
     private boolean hasMore;
     private int status;
     private String message;
-    private List<DatasBean> datas;
+    private List<AppBean> datas;
 
     public boolean isHasMore() {
         return hasMore;
@@ -40,15 +40,15 @@ public class RankBean {
         this.message = message;
     }
 
-    public List<DatasBean> getDatas() {
+    public List<AppBean> getDatas() {
         return datas;
     }
 
-    public void setDatas(List<DatasBean> datas) {
+    public void setDatas(List<AppBean> datas) {
         this.datas = datas;
     }
 
-    public static class DatasBean {
+    public static class AppBean {
         /**
          * addTime : 0
          * hasSameDevApp : false

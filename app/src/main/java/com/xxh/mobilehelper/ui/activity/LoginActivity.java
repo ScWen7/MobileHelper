@@ -14,11 +14,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.xxh.mobilehelper.R;
 import com.xxh.mobilehelper.base.BaseMvpActivity;
 import com.xxh.mobilehelper.bean.LoginBean;
+import com.xxh.mobilehelper.common.util.SPUtils;
 import com.xxh.mobilehelper.presenter.LoginPresenter;
 import com.xxh.mobilehelper.ui.view.LoginView;
 
@@ -176,7 +176,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     @Override
     public void loginSuccess(LoginBean loginBean) {
         String token = loginBean.getToken();
-        Toast.makeText(LoginActivity.this, "token:"+token, Toast.LENGTH_SHORT).show();
+        SPUtils.putString(this, "token", token);
     }
 
     @Override

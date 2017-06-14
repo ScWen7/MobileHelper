@@ -32,7 +32,7 @@ public class RecommendModel {
     ApiService mApiService;
 
     public RecommendModel() {
-        mApiService = HttpUtil.create().provideRetrofit(Constant.BASE_URL).create(ApiService.class);
+        mApiService = HttpUtil.getInstance().provideRetrofit(Constant.BASE_URL).create(ApiService.class);
     }
 
     public Observable<PageBean<AppInfo>> getApps(String jsonParams) {
