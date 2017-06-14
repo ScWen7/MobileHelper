@@ -19,7 +19,7 @@ import com.xxh.mobilehelper.presenter.BasePresenter;
 public abstract class BaseMvpFragment <P  extends BasePresenter> extends BaseFragment {
 
 
-    P mPresenter;
+    protected  P mPresenter;
 
 
     @Override
@@ -27,7 +27,10 @@ public abstract class BaseMvpFragment <P  extends BasePresenter> extends BaseFra
         super.onActivityCreated(savedInstanceState);
         mPresenter = createPresenter();
         mPresenter.attachView();
+        initData();
     }
+
+    protected abstract void initData();
 
     @Override
     public void onDestroyView() {

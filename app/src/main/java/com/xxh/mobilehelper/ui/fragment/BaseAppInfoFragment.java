@@ -6,10 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import com.xxh.mobilehelper.R;
 import com.xxh.mobilehelper.base.BaseMvpFragment;
 import com.xxh.mobilehelper.bean.AppInfoBean;
-import com.xxh.mobilehelper.presenter.BasePresenter;
-import com.xxh.mobilehelper.presenter.RankingPresenter;
+import com.xxh.mobilehelper.presenter.AppInfoPresenter;
 import com.xxh.mobilehelper.ui.adapter.AppRecyclerAdapter;
-import com.xxh.mobilehelper.ui.view.RankingView;
+import com.xxh.mobilehelper.ui.view.AppInfoView;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ import butterknife.BindView;
 
 /**
  */
-public class RankingFragment extends BaseMvpFragment implements RankingView {
+public abstract class BaseAppInfoFragment extends BaseMvpFragment<AppInfoPresenter> implements AppInfoView {
 
 
     @BindView(R.id.recycler_rank)
@@ -25,18 +24,19 @@ public class RankingFragment extends BaseMvpFragment implements RankingView {
     private AppRecyclerAdapter mRecyclerAdapter;
 
 
-    public static RankingFragment newInstance() {
-        RankingFragment fragment = new RankingFragment();
-        return fragment;
-    }
-
-
     @Override
     protected void initView() {
         mRecyclerRank.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        mRecyclerAdapter = new AppRecyclerAdapter.Builder().isShowPosition(true).isShowBrief(true).isShowCategoryName(true).build();
+        mRecyclerAdapter = buildAdapter();
         mRecyclerRank.setAdapter(mRecyclerAdapter);
     }
+
+    /**
+     * 子类需要重写此方法完成Adapter 的创建
+     *
+     * @return
+     */
+    protected abstract AppRecyclerAdapter buildAdapter();
 
     @Override
     protected int getLayoutId() {
@@ -45,12 +45,20 @@ public class RankingFragment extends BaseMvpFragment implements RankingView {
 
     @Override
     protected void initData() {
-
+        mPresenter.request(type(), 0);
     }
 
+    /**
+     * 子类重写此方法来指定type
+     *
+     * @return
+     */
+    public abstract int type();
+
+
     @Override
-    public BasePresenter createPresenter() {
-        return new RankingPresenter(this);
+    public AppInfoPresenter createPresenter() {
+        return new AppInfoPresenter(this);
     }
 
 

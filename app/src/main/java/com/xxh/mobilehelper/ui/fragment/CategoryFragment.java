@@ -18,6 +18,11 @@ public class CategoryFragment extends BaseMvpFragment<CategoryPresenter> {
 
 
     @Override
+    protected void initData() {
+
+    }
+
+    @Override
     public CategoryPresenter createPresenter() {
         return new CategoryPresenter();
     }

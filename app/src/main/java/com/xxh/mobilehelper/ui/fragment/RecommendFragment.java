@@ -56,6 +56,11 @@ public class RecommendFragment extends BaseMvpFragment<RecommendPresenter> imple
     }
 
     @Override
+    protected void initData() {
+
+    }
+
+    @Override
     public RecommendPresenter createPresenter() {
         return new RecommendPresenter(this,new RecommendModel());
     }

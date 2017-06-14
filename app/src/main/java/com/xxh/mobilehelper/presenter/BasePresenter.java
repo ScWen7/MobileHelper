@@ -8,5 +8,6 @@ package com.xxh.mobilehelper.presenter;
 
 public abstract class BasePresenter {
     public abstract void attachView();
-    public  abstract void detachView();
+
+    public abstract void detachView();
 }

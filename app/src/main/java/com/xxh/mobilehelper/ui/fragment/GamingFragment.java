@@ -30,6 +30,11 @@ public class GamingFragment extends BaseMvpFragment<GamePresenter> {
 
 
     @Override
+    protected void initData() {
+
+    }
+
+    @Override
     public GamePresenter createPresenter() {
         return new GamePresenter();
     }
