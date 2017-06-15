@@ -16,37 +16,39 @@ import io.reactivex.functions.Consumer;
  * 作用:
  */
 
-public class RecommendPresenter extends BasePresenter {
-    private RecommendView mView;
+public class RecommendPresenter extends BasePresenter<RecommendModel,RecommendView> {
 
-    private RecommendModel mModel;
 
-    public RecommendPresenter(RecommendView view, RecommendModel recommendModel) {
-        mView = view;
-        mModel = recommendModel;
+    public RecommendPresenter(RecommendView view) {
+        super(view);
     }
 
-    @Override
-    public void attachView() {
+    public void requestData(){
         mView.showLoading();
         mModel.getIndex()
-              .subscribe(new Consumer<List<MultiItemEntity>>() {
-                  @Override
-                  public void accept(List<MultiItemEntity> multiItemEntities) throws Exception {
-                      mView.dismissLoading();
-                      if(multiItemEntities!=null && multiItemEntities.size()>0) {
-                          mView.showResult(multiItemEntities);
-                      }else {
-                          mView.showNoData();
-                      }
-                  }
-              },new RxExceptionHandler<Throwable>(new Consumer<Throwable>() {
-                  @Override
-                  public void accept(Throwable throwable) throws Exception {
-                      mView.dismissLoading();
-                      mView.showError();
-                  }
-              }));
+                .subscribe(new Consumer<List<MultiItemEntity>>() {
+                    @Override
+                    public void accept(List<MultiItemEntity> multiItemEntities) throws Exception {
+                        mView.dismissLoading();
+                        if(multiItemEntities!=null && multiItemEntities.size()>0) {
+                            mView.showResult(multiItemEntities);
+                        }else {
+                            mView.showNoData();
+                        }
+                    }
+                },new RxExceptionHandler<Throwable>(new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        mView.dismissLoading();
+                        mView.showError();
+                    }
+                }));
+    }
+
+
+    @Override
+    protected RecommendModel createModel() {
+        return new RecommendModel();
     }
 
     @Override

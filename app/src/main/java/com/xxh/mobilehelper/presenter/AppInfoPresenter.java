@@ -13,30 +13,28 @@ import io.reactivex.functions.Consumer;
  * 作用：
  */
 
-public class AppInfoPresenter extends BasePresenter {
+public class AppInfoPresenter extends BasePresenter<AppInfoModel, AppInfoView> {
 
     public static final int RANK_TYPE = 0;
     public static final int GAME_TYPE = 1;
 
-    private AppInfoView mView;
-
-    private AppInfoModel mModel;
 
     private boolean isFirst = true;
 
     private int page = 0;
 
     public AppInfoPresenter(AppInfoView appInfoView) {
-        mModel = new AppInfoModel();
-        this.mView = appInfoView;
+        super(appInfoView);
     }
 
     @Override
-    public void attachView() {
-        mView.showLoading();
+    protected AppInfoModel createModel() {
+        return new AppInfoModel();
     }
 
+
     public void request(int type, final int page) {
+        mView.showLoading();
         Observable<AppInfoBean> observable = getObservable(type, page);
         observable.subscribe(new Consumer<AppInfoBean>() {
             @Override
@@ -46,7 +44,7 @@ public class AppInfoPresenter extends BasePresenter {
                     isFirst = !isFirst;
                     mView.dismissLoading();
                 }
-                if(page!=0) {
+                if (page != 0) {
                     mView.onLoadMoreComplete();
                 }
                 mView.showResult(appInfoBean);

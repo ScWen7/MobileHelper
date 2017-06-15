@@ -20,6 +20,7 @@
         android:title="Menu3"
         app:showAsAction="ifRoom"
         ></item>
+
     <!--
     问题：这里遇到了命名空间的问题
     在使用  showAsAction属性的过程中，使用了 android:showAsAction 属性设置并没有生效

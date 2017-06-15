@@ -1,11 +1,16 @@
 package com.xxh.mobilehelper.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by 解晓辉 on 2017/6/13.
  * 作用：
  */
 
-public class UserBean {
+public class UserBean implements Serializable{
+
+
+    private static final long serialVersionUID = 54042874703697769L;
     private String id;
     private String email;
     private String logo_url;

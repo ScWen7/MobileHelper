@@ -1,74 +1,27 @@
 package com.xxh.mobilehelper.ui.fragment;
 
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
+import android.support.v4.app.Fragment;
 
-import com.xxh.mobilehelper.R;
-import com.xxh.mobilehelper.base.BaseMvpFragment;
-import com.xxh.mobilehelper.presenter.GamePresenter;
-
-import butterknife.BindView;
-import butterknife.OnClick;
-import io.reactivex.Observable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
+import com.xxh.mobilehelper.presenter.AppInfoPresenter;
+import com.xxh.mobilehelper.ui.adapter.AppRecyclerAdapter;
 
 /**
 
  */
-public class GamingFragment extends BaseMvpFragment<GamePresenter> {
-
-
-    @BindView(R.id.test_empty)
-    TextView mTestEmpty;
-
-    public static GamingFragment newInstance() {
-        GamingFragment fragment = new GamingFragment();
-        return fragment;
-    }
+public class GamingFragment extends BaseAppInfoFragment {
 
 
     @Override
-    protected void initData() {
-
+    protected AppRecyclerAdapter buildAdapter() {
+        return new AppRecyclerAdapter.Builder().isShowPosition(false).isShowBrief(true).build();
     }
 
     @Override
-    public GamePresenter createPresenter() {
-        return new GamePresenter();
+    public int type() {
+        return AppInfoPresenter.GAME_TYPE;
     }
 
-    @Override
-    protected void initView() {
-
+    public static Fragment newInstance() {
+        return new GamingFragment();
     }
-
-    @OnClick(R.id.test_empty)
-    public void  clickOnView(View view){
-        Observable.empty().subscribe(new Consumer<Object>() {
-            @Override
-            public void accept(Object o) throws Exception {
-                Log.e("TAG", "next");
-            }
-        }, new Consumer<Throwable>() {
-            @Override
-            public void accept(Throwable throwable) throws Exception {
-                Log.e("TAG", "error");
-            }
-        }, new Action() {
-            @Override
-            public void run() throws Exception {
-                Log.e("TAG", "complete");
-            }
-        });
-
-    }
-
-    @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_gaming;
-    }
-
-
 }

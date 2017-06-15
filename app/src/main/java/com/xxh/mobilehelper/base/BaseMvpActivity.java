@@ -26,7 +26,7 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends BaseActiv
         super.onCreate(savedInstanceState);
         Log.e("TAG", "oncreate BaseMvpActivity");
         mPresenter = createPresenter();
-        mPresenter.attachView();
+
     }
 
 

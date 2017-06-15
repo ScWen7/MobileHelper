@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.xxh.mobilehelper.R;
 import com.xxh.mobilehelper.base.BaseMvpFragment;
-import com.xxh.mobilehelper.data.model.RecommendModel;
 import com.xxh.mobilehelper.presenter.RecommendPresenter;
 import com.xxh.mobilehelper.ui.adapter.RecommendRecyAdapter;
 import com.xxh.mobilehelper.ui.view.RecommendView;
@@ -30,9 +29,6 @@ public class RecommendFragment extends BaseMvpFragment<RecommendPresenter> imple
     SwipeRefreshLayout mRefresh;
 
 
-
-
-
     public RecommendFragment() {
     }
 
@@ -43,10 +39,9 @@ public class RecommendFragment extends BaseMvpFragment<RecommendPresenter> imple
     }
 
 
-
     @Override
     protected void initView() {
-        mRefresh.setColorSchemeResources( android.R.color.holo_green_light, android.R.color.holo_red_light, android.R.color.holo_blue_light);
+        mRefresh.setColorSchemeResources(android.R.color.holo_green_light, android.R.color.holo_red_light, android.R.color.holo_blue_light);
         mRecyclerReco.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
@@ -57,12 +52,12 @@ public class RecommendFragment extends BaseMvpFragment<RecommendPresenter> imple
 
     @Override
     protected void initData() {
-
+        mPresenter.requestData();
     }
 
     @Override
     public RecommendPresenter createPresenter() {
-        return new RecommendPresenter(this,new RecommendModel());
+        return new RecommendPresenter(this);
     }
 
 

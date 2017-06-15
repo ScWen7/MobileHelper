@@ -3,11 +3,12 @@ package com.xxh.mobilehelper.ui.fragment;
 import com.xxh.mobilehelper.R;
 import com.xxh.mobilehelper.base.BaseMvpFragment;
 import com.xxh.mobilehelper.presenter.CategoryPresenter;
+import com.xxh.mobilehelper.ui.view.CategoryView;
 
 /**
 
  */
-public class CategoryFragment extends BaseMvpFragment<CategoryPresenter> {
+public class CategoryFragment extends BaseMvpFragment<CategoryPresenter> implements CategoryView{
 
 
 
@@ -24,7 +25,7 @@ public class CategoryFragment extends BaseMvpFragment<CategoryPresenter> {
 
     @Override
     public CategoryPresenter createPresenter() {
-        return new CategoryPresenter();
+        return new CategoryPresenter(this);
     }
 
     @Override
@@ -35,5 +36,15 @@ public class CategoryFragment extends BaseMvpFragment<CategoryPresenter> {
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_category;
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void dismissLoading() {
+
     }
 }

@@ -6,9 +6,9 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.xxh.mobilehelper.common.Constant;
+import com.xxh.mobilehelper.common.util.ACache;
 import com.xxh.mobilehelper.common.util.DensityUtil;
 import com.xxh.mobilehelper.common.util.DeviceUtils;
-import com.xxh.mobilehelper.common.util.SPUtils;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -56,7 +56,7 @@ public class HttpParamInterceptor implements Interceptor {
         commonMap.put(Constant.SDK, DeviceUtils.getBuildVersionSDK() + "");
         commonMap.put(Constant.DENSITY_SCALE_FACTOR, DensityUtil.getDensity() + "");
 
-        String token = SPUtils.getString(mContext, "token");
+        String token = ACache.get(mContext).getAsString("token");
         if (!TextUtils.isEmpty(token)) {
             commonMap.put(Constant.TOKEN, token);
         }

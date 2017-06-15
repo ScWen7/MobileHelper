@@ -5,7 +5,6 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,7 +17,7 @@ import android.widget.TextView;
 import com.xxh.mobilehelper.R;
 import com.xxh.mobilehelper.base.BaseMvpActivity;
 import com.xxh.mobilehelper.bean.LoginBean;
-import com.xxh.mobilehelper.common.util.SPUtils;
+import com.xxh.mobilehelper.common.util.UIUtils;
 import com.xxh.mobilehelper.presenter.LoginPresenter;
 import com.xxh.mobilehelper.ui.view.LoginView;
 
@@ -57,7 +56,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
 
     @Override
     public LoginPresenter createPresenter() {
-        Log.e("TAG", "createPresenter()");
+
         return new LoginPresenter(this);
     }
 
@@ -164,19 +163,9 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
 
 
     @Override
-    public void showLoginLoading() {
-
-    }
-
-    @Override
-    public void dissmissLoading() {
-
-    }
-
-    @Override
     public void loginSuccess(LoginBean loginBean) {
-        String token = loginBean.getToken();
-        SPUtils.putString(this, "token", token);
+        UIUtils.showToast("登录成功");
+        finish();
     }
 
     @Override
@@ -185,4 +174,13 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     }
 
 
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void dismissLoading() {
+
+    }
 }

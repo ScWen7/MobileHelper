@@ -5,6 +5,8 @@ import com.xxh.mobilehelper.data.model.LoginModel;
 import com.xxh.mobilehelper.data.rxhelper.RxExceptionHandler;
 import com.xxh.mobilehelper.ui.view.LoginView;
 
+import org.greenrobot.eventbus.EventBus;
+
 import io.reactivex.functions.Consumer;
 
 /**
@@ -12,46 +14,44 @@ import io.reactivex.functions.Consumer;
  * 作用：
  */
 
-public class LoginPresenter extends BasePresenter {
+public class LoginPresenter extends BasePresenter<LoginModel, LoginView> {
 
-    private LoginModel mLoginModel;
-
-    private LoginView mLoginView;
 
     public LoginPresenter(LoginView loginView) {
-        mLoginModel = new LoginModel();
-        mLoginView = loginView;
+        super(loginView);
     }
 
     public void login(String email, String pasword) {
-        mLoginView.showLoginLoading();
-        mLoginModel.login(email, pasword)
+        mView.showLoading();
+        mModel.login(email, pasword)
                 .subscribe(new Consumer<LoginBean>() {
                     @Override
                     public void accept(LoginBean loginBean) throws Exception {
-                        mLoginView.dissmissLoading();
-                        mLoginView.loginSuccess(loginBean);
+                        mView.dismissLoading();
+                        mView.loginSuccess(loginBean);
+                        mModel.saveToken(loginBean.getToken());
+                        mModel.saveUser(loginBean.getUser());
+                        EventBus.getDefault().post(loginBean.getUser());
                     }
                 }, new RxExceptionHandler<Throwable>(new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         throwable.printStackTrace();
-                        mLoginView.dissmissLoading();
-                        mLoginView.loginError();
+                        mView.dismissLoading();
+                        mView.loginError();
                     }
                 }));
     }
 
 
     @Override
-    public void attachView() {
-        //登录不做任何操作
-
+    protected LoginModel createModel() {
+        return new LoginModel(getContext());
     }
 
     @Override
     public void detachView() {
-        mLoginModel = null;
-        mLoginView = null;
+        mModel = null;
+        mView = null;
     }
 }
