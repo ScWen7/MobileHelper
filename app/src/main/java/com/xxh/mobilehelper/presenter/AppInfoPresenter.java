@@ -24,6 +24,8 @@ public class AppInfoPresenter extends BasePresenter {
 
     private boolean isFirst = true;
 
+    private int page = 0;
+
     public AppInfoPresenter(AppInfoView appInfoView) {
         mModel = new AppInfoModel();
         this.mView = appInfoView;
@@ -34,7 +36,7 @@ public class AppInfoPresenter extends BasePresenter {
         mView.showLoading();
     }
 
-    public void request(int type, int page) {
+    public void request(int type, final int page) {
         Observable<AppInfoBean> observable = getObservable(type, page);
         observable.subscribe(new Consumer<AppInfoBean>() {
             @Override
@@ -43,6 +45,9 @@ public class AppInfoPresenter extends BasePresenter {
                 if (isFirst) {
                     isFirst = !isFirst;
                     mView.dismissLoading();
+                }
+                if(page!=0) {
+                    mView.onLoadMoreComplete();
                 }
                 mView.showResult(appInfoBean);
             }
@@ -75,4 +80,6 @@ public class AppInfoPresenter extends BasePresenter {
         mView = null;
         mModel = null;
     }
+
+
 }

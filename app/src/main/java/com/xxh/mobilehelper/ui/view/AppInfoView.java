@@ -10,4 +10,5 @@ import com.xxh.mobilehelper.ui.BaseView;
 
 public interface AppInfoView extends BaseView{
     void showResult(AppInfoBean appInfoBean);
+    void onLoadMoreComplete();
 }

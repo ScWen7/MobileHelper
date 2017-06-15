@@ -3,6 +3,7 @@ package com.xxh.mobilehelper.ui.fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.xxh.mobilehelper.R;
 import com.xxh.mobilehelper.base.BaseMvpFragment;
 import com.xxh.mobilehelper.bean.AppInfoBean;
@@ -23,12 +24,20 @@ public abstract class BaseAppInfoFragment extends BaseMvpFragment<AppInfoPresent
     RecyclerView mRecyclerRank;
     private AppRecyclerAdapter mRecyclerAdapter;
 
+    private int page = 0;
+
 
     @Override
     protected void initView() {
         mRecyclerRank.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mRecyclerAdapter = buildAdapter();
         mRecyclerRank.setAdapter(mRecyclerAdapter);
+        mRecyclerAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                mPresenter.request(type(), page);
+            }
+        }, mRecyclerRank);
     }
 
     /**
@@ -45,7 +54,7 @@ public abstract class BaseAppInfoFragment extends BaseMvpFragment<AppInfoPresent
 
     @Override
     protected void initData() {
-        mPresenter.request(type(), 0);
+        mPresenter.request(type(), page);
     }
 
     /**
@@ -73,8 +82,18 @@ public abstract class BaseAppInfoFragment extends BaseMvpFragment<AppInfoPresent
     }
 
     @Override
+    public void onLoadMoreComplete() {
+        mRecyclerAdapter.loadMoreComplete();
+    }
+
+
+    @Override
     public void showResult(AppInfoBean appInfoBean) {
         List<AppInfoBean.AppBean> datas = appInfoBean.getDatas();
+        if (appInfoBean.isHasMore()) {
+            page++;
+        }
         mRecyclerAdapter.addData(datas);
+        mRecyclerAdapter.setEnableLoadMore(appInfoBean.isHasMore());
     }
 }
