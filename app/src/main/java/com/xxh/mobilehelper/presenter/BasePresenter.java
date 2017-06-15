@@ -6,6 +6,9 @@ import android.support.v4.app.Fragment;
 
 import com.xxh.mobilehelper.ui.BaseView;
 
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+
 /**
  * Created by 解晓辉  on 2017/5/21 09:36 *
  * QQ  ：811733738
@@ -13,6 +16,8 @@ import com.xxh.mobilehelper.ui.BaseView;
  */
 
 public abstract class BasePresenter<M, V extends BaseView> {
+
+    private CompositeDisposable disposables;// 管理Destroy取消订阅者者
 
     protected M mModel;
     protected V mView;
@@ -35,6 +40,14 @@ public abstract class BasePresenter<M, V extends BaseView> {
 
     }
 
+    public boolean addRx(Disposable disposable) {
+        if (disposables == null) {
+            disposables = new CompositeDisposable();
+        }
+        disposables.add(disposable);
+        return true;
+    }
+
     public Context getContext() {
         return mContext;
     }
@@ -42,5 +55,12 @@ public abstract class BasePresenter<M, V extends BaseView> {
     protected abstract M createModel();
 
 
-    public abstract void detachView();
+    public void detachView() {
+        if (disposables != null) {
+            disposables.dispose();
+            disposables = null;
+        }
+    }
+
+    ;
 }

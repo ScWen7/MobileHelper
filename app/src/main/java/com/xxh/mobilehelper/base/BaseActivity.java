@@ -11,6 +11,8 @@ import com.xxh.mobilehelper.MyApplication;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by 解晓辉  on 2017/6/10 11:03 *
@@ -27,6 +29,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
     private MyApplication mApplication;
+
+    CompositeDisposable disposables;
 
 
     @Override
@@ -60,9 +64,22 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (disposables != null) {
+            disposables.dispose();
+            disposables = null;
+        }
+
         if (mUnbinder != null) {
             mUnbinder.unbind();
             mUnbinder = null;
         }
     }
+
+    public void addRx(Disposable disposable) {
+        if (disposables == null) {
+            disposables = new CompositeDisposable();
+        }
+        disposables.add(disposable);
+    }
+
 }
