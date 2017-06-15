@@ -1,10 +1,14 @@
 package com.xxh.mobilehelper.data.rxhelper;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
+import com.xxh.mobilehelper.common.exception.TokenErrorException;
 import com.xxh.mobilehelper.common.exception.TokenException;
 import com.xxh.mobilehelper.common.util.UIUtils;
+import com.xxh.mobilehelper.ui.activity.LoginActivity;
 
 import org.json.JSONException;
 
@@ -34,7 +38,10 @@ public class RxExceptionHandler<T extends Throwable> implements Consumer<T> {
 
     private Consumer<? super Throwable> onError;
 
-    public RxExceptionHandler(Consumer<? super Throwable> onError) {
+    private Context mContext;
+
+    public RxExceptionHandler(Context context, Consumer<? super Throwable> onError) {
+        this.mContext = context;
         this.onError = onError;
     }
 
@@ -56,6 +63,10 @@ public class RxExceptionHandler<T extends Throwable> implements Consumer<T> {
         } else if (t instanceof TokenException) {
             Log.e("TAG", "onError: TokenException");
             UIUtils.showToast(TOKEN_EXCEPTION);
+        } else if (t instanceof TokenErrorException) {
+            //Token 失效
+            UIUtils.showToast("身份验证信息过期，请重新登录!");
+            toLogin();
         } else {
             try {
                 onError.accept(t);
@@ -63,5 +74,9 @@ public class RxExceptionHandler<T extends Throwable> implements Consumer<T> {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void toLogin() {
+        mContext.startActivity(new Intent(mContext, LoginActivity.class));
     }
 }

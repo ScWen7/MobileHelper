@@ -16,27 +16,27 @@ import io.reactivex.functions.Consumer;
  * 作用:
  */
 
-public class RecommendPresenter extends BasePresenter<RecommendModel,RecommendView> {
+public class RecommendPresenter extends BasePresenter<RecommendModel, RecommendView> {
 
 
     public RecommendPresenter(RecommendView view) {
         super(view);
     }
 
-    public void requestData(){
+    public void requestData() {
         mView.showLoading();
         mModel.getIndex()
                 .subscribe(new Consumer<List<MultiItemEntity>>() {
                     @Override
                     public void accept(List<MultiItemEntity> multiItemEntities) throws Exception {
                         mView.dismissLoading();
-                        if(multiItemEntities!=null && multiItemEntities.size()>0) {
+                        if (multiItemEntities != null && multiItemEntities.size() > 0) {
                             mView.showResult(multiItemEntities);
-                        }else {
+                        } else {
                             mView.showNoData();
                         }
                     }
-                },new RxExceptionHandler<Throwable>(new Consumer<Throwable>() {
+                }, new RxExceptionHandler<Throwable>(mContext, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         mView.dismissLoading();

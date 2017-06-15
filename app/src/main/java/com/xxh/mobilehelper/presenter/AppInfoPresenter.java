@@ -49,7 +49,7 @@ public class AppInfoPresenter extends BasePresenter<AppInfoModel, AppInfoView> {
                 }
                 mView.showResult(appInfoBean);
             }
-        }, new RxExceptionHandler<Throwable>(new Consumer<Throwable>() {
+        }, new RxExceptionHandler<Throwable>(mContext,new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
                 //表示数据获取成功

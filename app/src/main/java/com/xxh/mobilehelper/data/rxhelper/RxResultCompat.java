@@ -1,6 +1,7 @@
 package com.xxh.mobilehelper.data.rxhelper;
 
 import com.xxh.mobilehelper.bean.BaseResult;
+import com.xxh.mobilehelper.common.exception.TokenErrorException;
 import com.xxh.mobilehelper.common.exception.TokenException;
 
 import io.reactivex.Observable;
@@ -22,10 +23,14 @@ public class RxResultCompat {
                 return upstream.flatMap(new Function<BaseResult<T>, ObservableSource<T>>() {
                     @Override
                     public ObservableSource<T> apply(BaseResult<T> tBaseResult) throws Exception {
+                        int status = tBaseResult.getStatus();
+                        tBaseResult.getStatus();
                         if (tBaseResult.isSuccess()) {
                             return Observable.just(tBaseResult.getData());
-                        }else if(tBaseResult.getStatus() == BaseResult.TOKEN_MISS) {
-                                return Observable.error(new TokenException(tBaseResult.getStatus()+"",tBaseResult.getMessage()));
+                        } else if (status == BaseResult.TOKEN_MISS) {
+                            return Observable.error(new TokenException(tBaseResult.getStatus() + "", tBaseResult.getMessage()));
+                        } else if (status == BaseResult.TOKEN_ERROR) {
+                            return Observable.error(new TokenErrorException(tBaseResult.getStatus() + "", tBaseResult.getMessage()));
                         }
                         return Observable.empty();
                     }

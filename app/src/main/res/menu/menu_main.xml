@@ -7,33 +7,33 @@
     <group android:id="@+id/group1">
         <item
             android:id="@+id/menu1"
-            android:icon="@drawable/ic_account_circle_white_36dp"
-            android:title="Menu1"
+            android:icon="@drawable/ic_refresh"
+            android:title="@string/app_refresh"
             app:showAsAction="always"
             tools:ignore="AppCompatResource"></item>
         <item
             android:id="@+id/menu2"
-            android:icon="@drawable/ic_account_circle_white_36dp"
-            android:title="Menu2"
+            android:icon="@drawable/ic_download"
+            android:title="@string/app_download"
             app:showAsAction="ifRoom"
             tools:ignore="AppCompatResource"></item>
         <item
             android:id="@+id/menu3"
-            android:icon="@drawable/ic_account_circle_white_36dp"
-            android:title="Menu3"
+            android:icon="@drawable/ic_delete"
+            android:title="@string/app_delete"
             app:showAsAction="ifRoom"
             tools:ignore="AppCompatResource"></item>
         <item
             android:id="@+id/menu4"
-            android:icon="@drawable/ic_account_circle_white_36dp"
-            android:title="Menu3"
+            android:icon="@drawable/ic_setting"
+            android:title="@string/app_setting"
             app:showAsAction="ifRoom"
             ></item>
     </group>
     <group android:id="@+id/group2">
         <item
             android:id="@+id/menu_logout"
-            android:icon="@drawable/ic_account_circle_white_36dp"
+            android:icon="@drawable/ic_close"
             android:title="退出登录"
             app:showAsAction="ifRoom"
             ></item>

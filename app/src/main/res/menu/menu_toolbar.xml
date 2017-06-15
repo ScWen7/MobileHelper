@@ -4,22 +4,17 @@
     >
     <item
         android:id="@+id/menu1"
-        android:icon="@drawable/ic_account_circle_white_36dp"
+        android:icon="@drawable/ic_search"
         android:title="Menu1"
         app:showAsAction="ifRoom"
-       ></item>
+        ></item>
     <item
         android:id="@+id/menu2"
-        android:icon="@drawable/ic_account_circle_white_36dp"
+        android:icon="@drawable/ic_download_white"
         android:title="Menu2"
         app:showAsAction="ifRoom"
         ></item>
-    <item
-        android:id="@+id/menu3"
-        android:icon="@drawable/ic_account_circle_white_36dp"
-        android:title="Menu3"
-        app:showAsAction="ifRoom"
-        ></item>
+
 
     <!--
     问题：这里遇到了命名空间的问题

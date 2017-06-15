@@ -10,6 +10,7 @@ public class BaseResult<T> {
 
     public static final int SUCCESS = 1;
     public static final int TOKEN_MISS = 10010;
+    public static final int TOKEN_ERROR = 10011;
 
 
     private int status;

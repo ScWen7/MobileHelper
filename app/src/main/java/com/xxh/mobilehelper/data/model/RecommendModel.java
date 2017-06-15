@@ -1,13 +1,10 @@
 package com.xxh.mobilehelper.data.model;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
-import com.xxh.mobilehelper.bean.AppInfo;
 import com.xxh.mobilehelper.bean.BannerBean;
 import com.xxh.mobilehelper.bean.BaseResult;
 import com.xxh.mobilehelper.bean.IndexBean;
-import com.xxh.mobilehelper.bean.PageBean;
 import com.xxh.mobilehelper.bean.SectionBean;
-import com.xxh.mobilehelper.common.Constant;
 import com.xxh.mobilehelper.data.api.ApiService;
 import com.xxh.mobilehelper.data.http.HttpUtil;
 import com.xxh.mobilehelper.data.rxhelper.RxResultCompat;
@@ -32,17 +29,10 @@ public class RecommendModel {
     ApiService mApiService;
 
     public RecommendModel() {
-        mApiService = HttpUtil.getInstance().provideRetrofit(Constant.BASE_URL).create(ApiService.class);
+        mApiService = HttpUtil.getInstance().provideRetrofit().create(ApiService.class);
     }
 
-    public Observable<PageBean<AppInfo>> getApps(String jsonParams) {
-        return mApiService
-                .getApps(jsonParams);
-    }
-    public Observable<PageBean<AppInfo>> getAppList(int  page) {
-        return mApiService
-                .getAppList(page);
-    }
+
     public Observable<List<MultiItemEntity>> getIndex() {
         return mApiService
                 .getIndex()
@@ -54,7 +44,7 @@ public class RecommendModel {
                         List<MultiItemEntity> multiItemEntities = new ArrayList<MultiItemEntity>();
                         //为了方便列表，调整数据结构
                         List<IndexBean.BannersBean> banners = indexBean.getBanners();
-                       multiItemEntities.add(new BannerBean(banners));
+                        multiItemEntities.add(new BannerBean(banners));
 
                         multiItemEntities.add(new MultiItemEntity() {
                             @Override

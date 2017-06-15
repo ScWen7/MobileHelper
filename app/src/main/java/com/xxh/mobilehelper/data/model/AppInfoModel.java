@@ -2,7 +2,6 @@ package com.xxh.mobilehelper.data.model;
 
 import com.xxh.mobilehelper.bean.AppInfoBean;
 import com.xxh.mobilehelper.bean.BaseResult;
-import com.xxh.mobilehelper.common.Constant;
 import com.xxh.mobilehelper.data.api.ApiService;
 import com.xxh.mobilehelper.data.http.HttpUtil;
 import com.xxh.mobilehelper.data.rxhelper.RxResultCompat;
@@ -20,7 +19,7 @@ public class AppInfoModel {
     ApiService mApiService;
 
     public AppInfoModel() {
-        mApiService = HttpUtil.getInstance().provideRetrofit(Constant.BASE_URL).create(ApiService.class);
+        mApiService = HttpUtil.getInstance().provideRetrofit().create(ApiService.class);
     }
 
     public Observable<AppInfoBean> getTopList(int page) {

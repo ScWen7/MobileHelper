@@ -10,7 +10,7 @@ import com.xxh.mobilehelper.presenter.BasePresenter;
  * QQ  ：811733738
  * 作用: 公共的Mvp Activity 继承与BaseActivity
  *
- *  getLayoutId()   -> initView()  -> createPresenter() -> presenter.attachView()
+ *  getLayoutId()   -> initView()  -> createPresenter() ->initData()
  *
  *   生命周期  onDestory-> 中包含  presenter 的 detachView 和 presenter的置空
  *
@@ -26,8 +26,10 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends BaseActiv
         super.onCreate(savedInstanceState);
         Log.e("TAG", "oncreate BaseMvpActivity");
         mPresenter = createPresenter();
-
+        initData();
     }
+
+    protected abstract void initData();
 
 
     @Override

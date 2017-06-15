@@ -2,10 +2,13 @@ package com.xxh.mobilehelper.data.api;
 
 import com.xxh.mobilehelper.bean.AppInfo;
 import com.xxh.mobilehelper.bean.BaseResult;
+import com.xxh.mobilehelper.bean.CategoryBean;
 import com.xxh.mobilehelper.bean.IndexBean;
 import com.xxh.mobilehelper.bean.LoginBean;
 import com.xxh.mobilehelper.bean.PageBean;
 import com.xxh.mobilehelper.bean.AppInfoBean;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;
@@ -39,6 +42,9 @@ public interface ApiService {
 
     @GET("game")
     Observable<BaseResult<AppInfoBean>> getGame(@Query("page") int page);
+
+    @GET("category")
+    Observable<BaseResult<List<CategoryBean>>> getCategory();
 
 
     @POST("login")

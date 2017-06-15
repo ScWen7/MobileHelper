@@ -55,6 +55,11 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     Toolbar mToolbar;
 
     @Override
+    protected void initData() {
+
+    }
+
+    @Override
     public LoginPresenter createPresenter() {
 
         return new LoginPresenter(this);

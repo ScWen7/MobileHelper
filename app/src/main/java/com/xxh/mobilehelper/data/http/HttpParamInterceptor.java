@@ -58,6 +58,7 @@ public class HttpParamInterceptor implements Interceptor {
 
         String token = ACache.get(mContext).getAsString("token");
         if (!TextUtils.isEmpty(token)) {
+            Log.e("TAG", "token:"+token);
             commonMap.put(Constant.TOKEN, token);
         }
 

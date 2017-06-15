@@ -2,6 +2,8 @@ package com.xxh.mobilehelper.data.http;
 
 import android.content.Context;
 
+import com.xxh.mobilehelper.common.Constant;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -24,6 +26,8 @@ public class HttpUtil {
 
 
     private Context mContext;
+    private Retrofit mRetrofit;
+
     private HttpUtil(Context context) {
         this.mContext = context;
         mOkHttpClient = provideOkHttpClient();
@@ -57,12 +61,16 @@ public class HttpUtil {
     }
 
 
-    public Retrofit provideRetrofit(String baseUrl) {
-        Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(mOkHttpClient);
-        return builder.build();
+    public Retrofit provideRetrofit() {
+
+        if (mRetrofit == null) {
+            mRetrofit = new Retrofit.Builder()
+                    .baseUrl(Constant.BASE_URL)
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .client(mOkHttpClient).build();
+        }
+
+        return mRetrofit;
     }
 }

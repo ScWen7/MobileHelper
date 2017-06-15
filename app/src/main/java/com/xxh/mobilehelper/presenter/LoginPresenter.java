@@ -33,7 +33,7 @@ public class LoginPresenter extends BasePresenter<LoginModel, LoginView> {
                         mModel.saveUser(loginBean.getUser());
                         EventBus.getDefault().post(loginBean.getUser());
                     }
-                }, new RxExceptionHandler<Throwable>(new Consumer<Throwable>() {
+                }, new RxExceptionHandler<Throwable>(mContext,new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         throwable.printStackTrace();

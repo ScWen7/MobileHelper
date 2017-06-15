@@ -12,6 +12,10 @@
     <string name="hint_login_password">输入密码</string>
     <string name="login">登录</string>
     <string name="login_forget_pwd">忘记密码</string>
+    <string name="app_refresh">应用更新</string>
+    <string name="app_download">下载管理</string>
+    <string name="app_delete">应用卸载</string>
+    <string name="app_setting">系统设置</string>
     <string-array name="main_tab">
         <item>推荐</item>
         <item>排行</item>
