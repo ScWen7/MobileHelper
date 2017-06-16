@@ -24,7 +24,7 @@ public abstract class BaseAppInfoFragment extends BaseMvpFragment<AppInfoPresent
     RecyclerView mRecyclerRank;
     private AppRecyclerAdapter mRecyclerAdapter;
 
-    private int page = 0;
+    protected int page = 0;
 
 
     @Override

@@ -1,12 +1,12 @@
 package com.xxh.mobilehelper.data.api;
 
 import com.xxh.mobilehelper.bean.AppInfo;
+import com.xxh.mobilehelper.bean.AppInfoBean;
 import com.xxh.mobilehelper.bean.BaseResult;
 import com.xxh.mobilehelper.bean.CategoryBean;
 import com.xxh.mobilehelper.bean.IndexBean;
 import com.xxh.mobilehelper.bean.LoginBean;
 import com.xxh.mobilehelper.bean.PageBean;
-import com.xxh.mobilehelper.bean.AppInfoBean;
 
 import java.util.List;
 
@@ -14,6 +14,7 @@ import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 
@@ -51,4 +52,12 @@ public interface ApiService {
     Observable<BaseResult<LoginBean>> login(@Body LoginRequest request);
 
 
+    @GET("category/featured/{categoryid}")
+    Observable<BaseResult<AppInfoBean>> getCategoryFeatured(@Path("categoryid") int categoryId, @Query("page") int page);
+
+    @GET("category/toplist/{categoryid}")
+    Observable<BaseResult<AppInfoBean>> getCategoryToplist(@Path("categoryid") int categoryId, @Query("page") int page);
+
+    @GET("category/newlist/{categoryid}")
+    Observable<BaseResult<AppInfoBean>> getCategoryNewlist(@Path("categoryid") int categoryId, @Query("page") int page);
 }

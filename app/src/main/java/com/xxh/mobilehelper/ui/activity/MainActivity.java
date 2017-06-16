@@ -25,6 +25,7 @@ import com.xxh.mobilehelper.R;
 import com.xxh.mobilehelper.bean.UserBean;
 import com.xxh.mobilehelper.common.Constant;
 import com.xxh.mobilehelper.common.util.ACache;
+import com.xxh.mobilehelper.common.util.UIUtils;
 import com.xxh.mobilehelper.ui.adapter.MyPagerAdapter;
 import com.xxh.mobilehelper.ui.fragment.CategoryFragment;
 import com.xxh.mobilehelper.ui.fragment.GamingFragment;
@@ -151,7 +152,9 @@ public class MainActivity extends AppCompatActivity {
                         mDrawerMain.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.menu_logout:
-                        Toast.makeText(MainActivity.this, "退出登录", Toast.LENGTH_SHORT).show();
+                        UIUtils.showToast("退出登录成功");
+                        ACache.get(MainActivity.this).put(Constant.TOKEN, "");
+                        ACache.get(MainActivity.this).put(Constant.USER, "");
 
                         break;
                 }

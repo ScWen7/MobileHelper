@@ -17,11 +17,11 @@ public class AppInfoPresenter extends BasePresenter<AppInfoModel, AppInfoView> {
 
     public static final int RANK_TYPE = 0;
     public static final int GAME_TYPE = 1;
+    public static final int CATEGORY_TYPE = 2;
 
 
     private boolean isFirst = true;
 
-    private int page = 0;
 
     public AppInfoPresenter(AppInfoView appInfoView) {
         super(appInfoView);
@@ -34,8 +34,12 @@ public class AppInfoPresenter extends BasePresenter<AppInfoModel, AppInfoView> {
 
 
     public void request(int type, final int page) {
+        request(type, page, 0, 0);
+    }
+
+    public void request(int type, int page, int categoryid, int flagtype) {
         mView.showLoading();
-        Observable<AppInfoBean> observable = getObservable(type, page);
+        Observable<AppInfoBean> observable = getObservable(type, page, categoryid, flagtype);
         observable.subscribe(new Consumer<AppInfoBean>() {
             @Override
             public void accept(AppInfoBean appInfoBean) throws Exception {
@@ -43,13 +47,12 @@ public class AppInfoPresenter extends BasePresenter<AppInfoModel, AppInfoView> {
                 if (isFirst) {
                     isFirst = !isFirst;
                     mView.dismissLoading();
-                }
-                if (page != 0) {
+                } else {
                     mView.onLoadMoreComplete();
                 }
                 mView.showResult(appInfoBean);
             }
-        }, new RxExceptionHandler<Throwable>(mContext,new Consumer<Throwable>() {
+        }, new RxExceptionHandler<Throwable>(mContext, new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
                 //表示数据获取成功
@@ -62,12 +65,20 @@ public class AppInfoPresenter extends BasePresenter<AppInfoModel, AppInfoView> {
 
     }
 
-    private Observable<AppInfoBean> getObservable(int type, int page) {
+    private Observable<AppInfoBean> getObservable(int type, int page, int categoryid, int flagtype) {
         switch (type) {
             case RANK_TYPE:
                 return mModel.getTopList(page);
             case GAME_TYPE:
                 return mModel.getGame(page);
+            case CATEGORY_TYPE:
+                if (flagtype == 0) {
+                    return mModel.getCategoryFeatured(categoryid, page);
+                } else if (flagtype == 1) {
+                    return mModel.getCategoryToplist(categoryid, page);
+                } else {
+                    return mModel.getCategoryNewlist(categoryid, page);
+                }
             default:
                 return mModel.getTopList(page);
         }

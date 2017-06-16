@@ -25,5 +25,25 @@
 
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="MyCustomTabLayout" parent="Base.Widget.Design.TabLayout">
+        <!--设置tab的宽度-->
+        <!--<item name="tabMaxWidth">72dp</item> -->
+        <!--设置tab的宽度-->
+        <!--<item name="tabMinWidth">72dp</item>-->
+        <item name="tabIndicatorColor">#ff0000</item> <!--指示器的颜色-->
+        <item name="tabIndicatorHeight">0dp</item> <!--指示器的高度-->
+        <item name="tabSelectedTextColor">@color/google_blue</item> <!--被选中tab的字体颜色-->
+        <item name="tabTextAppearance">@style/MyCustomTabTextAppearance</item> <!--字体的设置-->
+
+    </style>
+
+
     <style name="AppTheme.PopupOverlay" parent="AlertDialog.AppCompat.Light"/>
+
+    <style name="MyCustomTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">16dp</item> <!--字体大小-->
+        <item name="android:textColor">@color/white</item> <!--默认字体大颜色-->
+        <item name="textAllCaps">false</item> <!--是否自动转换成大写(如果是自定义样式必须是false)-->
+    </style>
 </resources>

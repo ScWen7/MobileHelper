@@ -34,4 +34,23 @@ public class AppInfoModel {
                 .compose(RxResultCompat.<AppInfoBean>handleResult());
     }
 
+    public Observable<AppInfoBean> getCategoryFeatured(int categoryid, int flagtype) {
+        return mApiService.getCategoryFeatured(categoryid, flagtype)
+                .compose(RxSchedulerHepler.<BaseResult<AppInfoBean>>io_main())
+                .compose(RxResultCompat.<AppInfoBean>handleResult());
+    }
+
+    public Observable<AppInfoBean> getCategoryToplist(int categoryid, int flagtype) {
+        return mApiService.getCategoryToplist(categoryid, flagtype)
+                .compose(RxSchedulerHepler.<BaseResult<AppInfoBean>>io_main())
+                .compose(RxResultCompat.<AppInfoBean>handleResult());
+    }
+
+    public Observable<AppInfoBean> getCategoryNewlist(int categoryid, int flagtype) {
+        return mApiService.getCategoryNewlist(categoryid, flagtype)
+                .compose(RxSchedulerHepler.<BaseResult<AppInfoBean>>io_main())
+                .compose(RxResultCompat.<AppInfoBean>handleResult());
+    }
+
+
 }
