@@ -11,6 +11,6 @@ import com.xxh.mobilehelper.ui.BaseView;
 public interface LoginView  extends BaseView{
 
     void loginSuccess(LoginBean loginBean);
-
     void loginError();
+    void verifyErroe();
 }

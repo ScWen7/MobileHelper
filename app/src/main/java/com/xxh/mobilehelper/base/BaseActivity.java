@@ -30,7 +30,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected MyApplication mApplication;
 
-    CompositeDisposable disposables;
+   protected CompositeDisposable disposables;
 
 
     @Override

@@ -28,7 +28,7 @@ public abstract class BaseFragment extends Fragment {
 
     protected View mRootView;
 
-    private Unbinder mUnbinder;
+    protected Unbinder mUnbinder;
 
     @Nullable
     @Override

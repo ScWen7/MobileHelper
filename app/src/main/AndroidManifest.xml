@@ -21,8 +21,7 @@
         </activity>
         <activity android:name=".ui.activity.LoginActivity">
         </activity>
-        <activity android:name=".ui.activity.CategoryAppActivity">
-        </activity>
+
         <activity android:name=".ui.activity.AppDetailActivity" android:theme="@style/Tran">
         </activity>
     </application>

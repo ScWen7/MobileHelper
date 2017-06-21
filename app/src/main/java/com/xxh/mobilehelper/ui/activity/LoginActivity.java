@@ -178,6 +178,11 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
 
     }
 
+    @Override
+    public void verifyErroe() {
+
+    }
+
 
     @Override
     public void showLoading() {

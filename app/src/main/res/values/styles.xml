@@ -25,6 +25,8 @@
 
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.PopupOverlay" parent="AlertDialog.AppCompat.Light"/>
+
 
     <style name="MyCustomTabLayout" parent="Base.Widget.Design.TabLayout">
         <!--设置tab的宽度-->
@@ -39,7 +41,6 @@
     </style>
 
 
-    <style name="AppTheme.PopupOverlay" parent="AlertDialog.AppCompat.Light"/>
 
     <style name="MyCustomTabTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">16dp</item> <!--字体大小-->
@@ -49,7 +50,7 @@
 
     <style name="Tran" parent="AppTheme">
         <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowIsTranslucent">true</item>
+        <!--<item name="android:windowIsTranslucent">true</item>-->
     </style>
 
     <style name="Text_Content">
