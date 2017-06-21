@@ -14,8 +14,11 @@
     <string name="login_forget_pwd">忘记密码</string>
     <string name="app_refresh">应用更新</string>
     <string name="app_download">下载管理</string>
+    <string name="download">下载</string>
     <string name="app_delete">应用卸载</string>
     <string name="app_setting">系统设置</string>
+    <string name="app_desc">应用描述</string>
+    <string name="detail_info">详细信息</string>
     <string-array name="main_tab">
         <item>推荐</item>
         <item>排行</item>

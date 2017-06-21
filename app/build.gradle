@@ -49,6 +49,7 @@ dependencies {
     compile 'com.youth.banner:banner:1.4.2'
 
     compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.ms-square:expandableTextView:0.1.4'
 
 
 }
