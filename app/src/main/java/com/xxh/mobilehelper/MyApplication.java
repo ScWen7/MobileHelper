@@ -2,6 +2,7 @@ package com.xxh.mobilehelper;
 
 import android.app.Application;
 import android.content.Context;
+import android.view.View;
 
 import com.xxh.mobilehelper.common.util.DensityUtil;
 import com.xxh.mobilehelper.common.util.DeviceUtils;
@@ -17,11 +18,20 @@ import com.xxh.mobilehelper.data.http.HttpUtil;
 public class MyApplication extends Application {
 
 
+    private View cacheView;
+
     public static Application get(Context context) {
         return (Application) context.getApplicationContext();
 
     }
 
+    public View getCacheView() {
+        return cacheView;
+    }
+
+    public void setCacheView(View cacheView) {
+        this.cacheView = cacheView;
+    }
 
     @Override
     public void onCreate() {

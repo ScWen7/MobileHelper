@@ -1,13 +1,18 @@
 package com.xxh.mobilehelper.ui.fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.xxh.mobilehelper.R;
 import com.xxh.mobilehelper.base.BaseMvpFragment;
 import com.xxh.mobilehelper.bean.AppInfoBean;
+import com.xxh.mobilehelper.common.Constant;
 import com.xxh.mobilehelper.presenter.AppInfoPresenter;
+import com.xxh.mobilehelper.ui.activity.AppDetailActivity;
 import com.xxh.mobilehelper.ui.adapter.AppRecyclerAdapter;
 import com.xxh.mobilehelper.ui.view.AppInfoView;
 
@@ -38,6 +43,17 @@ public abstract class BaseAppInfoFragment extends BaseMvpFragment<AppInfoPresent
                 mPresenter.request(type(), page);
             }
         }, mRecyclerRank);
+
+        mRecyclerRank.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                mApplication.setCacheView(view);
+                Intent intent = new Intent(mActivity, AppDetailActivity.class);
+                intent.putExtra(Constant.APPID, mRecyclerAdapter.getItem(position).getId());
+                startActivity(intent);
+                mActivity.overridePendingTransition(R.anim.anim_in,R.anim.anim_in);
+            }
+        });
     }
 
     /**

@@ -46,4 +46,9 @@
         <item name="android:textColor">@color/white</item> <!--默认字体大颜色-->
         <item name="textAllCaps">false</item> <!--是否自动转换成大写(如果是自定义样式必须是false)-->
     </style>
+
+    <style name="Tran" parent="AppTheme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 </resources>

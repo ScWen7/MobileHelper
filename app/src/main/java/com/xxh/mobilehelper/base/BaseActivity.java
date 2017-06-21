@@ -28,7 +28,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private Unbinder mUnbinder;
 
 
-    private MyApplication mApplication;
+    protected MyApplication mApplication;
 
     CompositeDisposable disposables;
 

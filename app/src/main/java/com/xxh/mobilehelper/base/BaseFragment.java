@@ -24,7 +24,7 @@ public abstract class BaseFragment extends Fragment {
 
     protected Activity mActivity;
 
-    private MyApplication mApplication;
+    protected MyApplication mApplication;
 
     protected View mRootView;
 
