@@ -6,6 +6,8 @@ import android.animation.ObjectAnimator;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.v7.widget.Toolbar;
 import android.text.format.Formatter;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,8 +43,8 @@ public class AppDetailActivity extends BaseMvpActivity<AppDetailPresenter> imple
     View mViewCache;
     @BindView(R.id.activity_app_detail)
     FrameLayout mActivityAppDetail;
-    @BindView(R.id.ll_content)
-    LinearLayout mLlContent;
+    @BindView(R.id.coord_content)
+    CoordinatorLayout mCoordinatorLayout;
     @BindView(R.id.ll_screen_shot)
     LinearLayout mLlScreenShot;
     @BindView(R.id.expandable_text)
@@ -65,6 +67,13 @@ public class AppDetailActivity extends BaseMvpActivity<AppDetailPresenter> imple
     LinearLayout mLlAppsSamedev;
     @BindView(R.id.ll_apps_rel)
     LinearLayout mLlAppsRel;
+    @BindView(R.id.iv_icon)
+    ImageView mIvIcon;
+
+    @BindView(R.id.tv_title)
+    TextView mTvTitle;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
     private int mAppId;
 
     private ObjectAnimator mAnimator;
@@ -115,6 +124,12 @@ public class AppDetailActivity extends BaseMvpActivity<AppDetailPresenter> imple
         mViewCache.setLayoutParams(params);
         openAnimator();
 
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 
@@ -127,7 +142,7 @@ public class AppDetailActivity extends BaseMvpActivity<AppDetailPresenter> imple
             @Override
             public void onAnimationEnd(Animator animation) {
                 mViewCache.setVisibility(View.GONE);
-                mLlContent.setVisibility(View.VISIBLE);
+                mCoordinatorLayout.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -195,6 +210,8 @@ public class AppDetailActivity extends BaseMvpActivity<AppDetailPresenter> imple
     }
 
     private void showAppDesc(AppInfo appInfo) {
+        Glide.with(this).load(Constant.BASEIMGURL + appInfo.getIcon()).into(mIvIcon);
+        mTvTitle.setText(appInfo.getDisplayName());
         mViewIntroduction.setText(appInfo.getIntroduction());
         mTxtUpdateTime.setText(DateUtils.formatDate(appInfo.getUpdateTime()));
         mTxtApkSize.setText((appInfo.getApkSize() / 1014 / 1024) + " Mb");
